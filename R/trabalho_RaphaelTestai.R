@@ -11,3 +11,9 @@ a <- c(5,4,3,2,1)
 
 a
 
+# git pull ("vai puxar o arquivo)
+# git init
+# git status
+# git add
+# git commit -m "..."
+# git push
