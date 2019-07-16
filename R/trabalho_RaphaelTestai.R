@@ -61,7 +61,7 @@ library(raster)
   # Pode-se criar sem o concatenar c:  x <- 1:7. Ou pode usar o x <- seq(1,7,by = 4)
   # A função class() retorna o tipo do objeto.
 
-## Exemplo de factor:
+  ## Exemplo de factor:
 
   # x <- c(macho, femea, macho, femea, macho, macho)
   # y <- factor(x)
@@ -103,6 +103,17 @@ library(raster)
   # head() mostra os 6 primeiros, mas pode-se incluir um argumento para visualizar uma quantidade maior.
   # pode-se usar cbind(x,$state...), state é o nome da nova coluna.
 
+### Importar arquivos
+
+  # read.table() , read.csv() , read.csv2(). Esse segundo é o padrão decimal como vírgula.
+  # O primeiro argumento é o path, o segundo é o separador e o terceiro é o header. 
+  # summary() retorna as informações analisadas dos dados. É boa para controle de qualidade. 
+  # as.numeric() converte o arquivo para numérico. A lógica é a mesma para os outros tipos.
+  # gsub(",",".",x$comp) faz a substituição da vírgula por ponto na coluna comprimento do data frame.
+  # 
+  # ### Salvando os dados
+  # 
+  # write.table(), write.csv(), write.csv2().  Esse arquivo que vai para a pasta results.
 
 
 
