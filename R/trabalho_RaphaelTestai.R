@@ -17,5 +17,6 @@ a
 # git add
 # git commit -m "..."
 # git push
+# git config --global user.email "you@example.com"
+# git config --global user.user "RTestai"
 
-#testando mjjjk
