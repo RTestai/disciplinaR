@@ -117,3 +117,26 @@ library(raster)
 
 
 
+#================================================                             
+#======  Aula 5 - Análise Exploratória:  ========
+#================================================
+
+
+
+
+
+#data("anscombie")
+#apply(anscombie,2,mean) >> aplicar média
+#correlação >> cor()
+# coef(lm(anscombie$y1 ~ anscombie$x1)) > o til é "em função". Essa função realiza a regressão linear dos dados.
+#is.na() para verificar se há NA com um retorno lógico.Pode usar um which().
+#moda <- sort(table(fraldas$idade), decresing = true)
+#quantile()
+#par(mfrow=c(1,2))
+#hist() monta um histograma de frequência.
+# Só é possível plotar uma curva em um histograma se for uma distribuição probabilística, usando o prob=true.
+# a função pairs() retorna o gráfico das correlações.
+
+
+
+
