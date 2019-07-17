@@ -211,7 +211,27 @@ par(mfrow=c(1,1))
 
 
 
+#Criando o BOXPLOT
+boxplot(iris$Sepal.Length)
+boxplot(iris$Sepal.Width)
+boxplot(iris$Petal.Length)
+boxplot(iris$Petal.Width)
 
 
+#Para as espécies
+boxplot(Sepal.Length ~ Species, data=iris)
+boxplot(Sepal.Width ~ Species, data=iris)
+boxplot(Petal.Length ~ Species, data=iris)
+boxplot(Petal.Width ~ Species, data=iris)
 
 
+#Identificando outliers
+boxplot(iris$Sepal.Width)
+my_boxplot <- boxplot(iris$Sepal.Width, plot=FALSE)
+my_boxplot
+# o objeto é uma lista e os valores outliers estão guardados no elemento $out da lista
+outliers <- my_boxplot$out
+#qual a posicao dos outliers
+which(iris$Sepal.Width %in% outliers)#%in% significa "quais que estão dentro"
+# vamos usar a posicao para indexar o objeto
+iris[which(iris$Sepal.Width %in% outliers), c("Sepal.Width", "Species")]
