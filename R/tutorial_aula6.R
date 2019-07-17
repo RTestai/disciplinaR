@@ -71,6 +71,7 @@ head(iris)
 summary(iris)
 
 #Verificando a quantidade de informações por espécies
+iris$Species
 table(iris$Species)
 # media do comprimento de sepala por especie
 list(iris$Species)
