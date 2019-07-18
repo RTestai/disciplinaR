@@ -24,9 +24,7 @@ laby <- "Comprimento da Pétala"
 par(mfrow=c(1,3), las=1, bty="l") # aqui estamos usando las e bty dentro do par para fixar para todas as janelas
 ## Primeiro Plot:
 plot(Petal.Length ~ Sepal.Width, data=iris[iris$Species=="virginica",], 
-     col="tomato",
-     ylim=limy, xlim=limx,
-     ylab=laby, xlab=labx)
+     col="tomato")
 
 # linha do previsto pelo modelo
 ## a + b*x 
@@ -36,9 +34,7 @@ mtext("A", 3, adj=0, font=2)
 
 ## Segundo Plot:
 plot(Petal.Length ~ Sepal.Width, data=iris[iris$Species=="versicolor",], 
-     col="navy",
-     ylim=limy, xlim=limx,
-     ylab="", xlab=labx)
+     col="navy")
 mtext("B", 3, adj=0, font=2)
 # linha do previsto pelo modelo
 ## a + b*x 
@@ -48,9 +44,7 @@ abline(a=coefVers[1], b=coefVers[2],
 ## Terceiro Plot:
 
 plot(Petal.Length ~ Sepal.Width, data=iris[iris$Species=="setosa",], 
-     col="blue",
-     ylim=limy, xlim=limx,
-     ylab="", xlab=labx)
+     col="blue")
 mtext("C", 3, adj=0, font=2)
 # linha do previsto pelo modelo
 ## a + b*x 
@@ -68,9 +62,7 @@ par(mfrow=c(1,3), las=1, bty="l") # aqui estamos usando las e bty dentro do par 
 
 ## Primeiro Plot:
 plot(Petal.Length ~ Sepal.Width, data=iris[iris$Species=="virginica",], 
-     col="tomato",
-     ylim=limy, xlim=limx,
-     ylab=laby, xlab=labx)
+     col="tomato")
 
 # linha do previsto pelo modelo
 ## a + b*x 
@@ -83,9 +75,7 @@ mtext("A", 3, adj=0, font=2)
 
 ## Segundo Plot:
 plot(Petal.Length ~ Sepal.Width, data=iris[iris$Species=="versicolor",], 
-     col="navy",
-     ylim=limy, xlim=limx,
-     ylab="", xlab=labx)
+     col="navy")
 mtext("B", 3, adj=0, font=2)
 # linha do previsto pelo modelo
 ## a + b*x 
@@ -97,9 +87,7 @@ abline(a=coefVers[1], b=coefVers[2],
 ## Terceiro Plot:
 
 plot(Petal.Length ~ Sepal.Width, data=iris[iris$Species=="setosa",], 
-     col="blue",
-     ylim=limy, xlim=limx,
-     ylab="", xlab=labx)
+     col="blue")
 mtext("C", 3, adj=0, font=2)
 # linha do previsto pelo modelo
 ## a + b*x 
