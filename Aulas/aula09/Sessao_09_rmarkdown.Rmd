@@ -1,0 +1,191 @@
+---
+title: "Disciplina: Projetos de análise de dados usando R"
+subtitle: "Dia 5: Relatórios reproduzíveis usando rmarkdown"
+author: "Andrea Sánchez Tapia, Sara Mortara, Diogo Rocha"
+date: "2019/06/17 (updated: `r Sys.Date()`)"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: true
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+# O fluxo de trabalho
+
+`Dados > Análise >` __`Redação`__
+
++ Abre word
++ Copia e cola as figuras...
++ Perde muito tempo configurando as figuras `¬¬` 
++ Copia e cola os valores no texto: "A média de altura foi 4.86m"
++ Percebe um erro
++ Refaz as análises
+
+__[Isto não é mais um problema porque a gente usa `R`]()__
+
++ Copia e cola as figuras...
++ Perde muito tempo configurando as figuras `¬¬`...
++ Copia e cola os valores corrigidos no texto...
++ Percebe um erro...
+
+---
+# E se houvesse um jeito de aproveitar a capacidade de script do R para fazer documentos completos?
+
+![](https://media.giphy.com/media/3o7buirYcmV5nSwIRW/giphy.gif)
+
+---
+class: middle, inverse, center
+
+
+# $\LaTeX$
+
+
+
+---
+# $\LaTeX$
+
++ Sistemas de preparação de documentos baseados em arquivos de texto.
+
+--
+
++ Diferente de editores de texto [WYSIWYG - What you see is what you get]()
+
+--
+
++ A formatação é realizada usando marcações que são relativamente fáceis de aprender
+
+
+---
+
+## Vantagens de usar $\LaTeX$
+
++ Output maravilhoso <3
+
+--
+
++ Arquivos de texto: pode ser usado em [__controle de versões__]() como `git` 
+
+--
+
++ Arquivos de $\LaTeX$ podem ser submetidos como
+manuscritos para algumas revistas (o que é _amplamente usado _ em outras disciplinas mas a ecologia chega lá já já)
+
+--
+
++ __[Dá para incluir código de R, que o código seja executado e que o output do código entre no documento]()__
+
+<center> 
+$\LaTeX$ -> `Sweave`
+</center>
+
+
+---
+## Desvantagens de $\LaTeX$ 
+
++ Instalação complicada
+
+--
+
++ Suporte multi-língua às vezes complicado
+
+--
+
++ Marcação complexa, curva de aprendizado íngrime
+
+--
+
++ Uma boa opção para aprender: __Overleaf__
+
+
+---
+background-image: url(figs/overleaf.png)
+background-size: 100%
+
+# Overleaf
+
+.footnote[https://www.overleaf.com/7447819279hqmkncfvybhf]
+
+---
+background-image: url(https://bookdown.org/yihui/rmarkdown/images/hex-rmarkdown.png)
+background-size: 20%
+background-position: 90% 80%
+
+# markdown é $\LaTeX$ sem esteroides - e às vezes é o que a gente precisa. 
+
+
++ Baseado em html, comandos relativamente simples
++ Para inserir código de `R`: __rmarkdown__
++ Bem implementado no RStudio
++ Em vez de sweave: rmarkdown -> `knitr`
+
+
+
+```{r}
+2 + 2
+```
+
+---
+# Como fazer? 
+
++ Arquivo novo -> Rmarkdown.
++ Bote um título e seu nome, selecione Apresentação html. 
++ Faça click em `knitr` e salve o arquivo na pasta [docs]() de seu projeto. 
++ Compare o que foi knittado com o arquivo original... 
+
+---
+# Estrutura de um documento de markdown
+
++ Um documento de rmarkdown tem a estrutura seguinte. 
++ Um cabeçalho (chamado de YAML), com opções, entre outras o título, o autor, a data e o tipo de output que você quer. Outras funções poderão ser incluídas posteriormente, inclusive a citação de artigos. 
++ O código de R se encontra entre acentos graves triplos
++ Cada porção de código é chamada de _chunk_ na internet e na documentação de rmarkdown e rstudio.
++ O primeiro _chunk_ tem as opções gerais que serão usadas. 
++ O texto vai por fora dos chunks, e pode ser formatado 
+
+---
+# Marcações de markdown e rmarkdown
+
+.pull-left[
+`texto simples`  
+`__negrito__` e `**negrito**`  
+`superscript^2^`    
+`~~strikethrough~~`   
+`[link](www.rstudio.com)`
+`# Titulo 1`
+`## Titulo 2`
+]
+
+.pull-right[
+texto simples  
+__negrito__  e **negrito**  
+superscript^2^    
+~~strikethrough~~   
+[link](www.rstudio.com) 
+# Titulo 1
+## Titulo 2
+]
+
++ Títulos #, #
++ negrito cursivo listas numeradas ou não
+
+---
+
+# Dá para adicionar no git porque é texto!
+
+# No terminal
+
+`git add docs <seu arquivo.Rmd>`  
+`git commit -m "uma mensagem de commit"`  
+`git push origin master`  
+
+# Não é preciso adicionar o arquivo html
+
+---
+# Referências
+https://peerj.com/preprints/3159/

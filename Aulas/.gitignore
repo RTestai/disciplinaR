@@ -1,0 +1,11 @@
+.Rproj
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+README.html
+/libs
+/ref
+/ignore
+*.R~
+*.Rmd~

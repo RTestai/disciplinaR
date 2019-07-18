@@ -1,0 +1,656 @@
+---
+title: "Disciplina: Projetos de análise de dados usando R"
+subtitle: "Dia 1, aula 2: Uma breve introdução a R"
+author: "Andrea Sánchez-Tapia, Sara Mortara, Diogo Rocha"
+date: "2019/06/17 (updated: `r Sys.Date()`)"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include = FALSE}
+library(xaringanthemer)
+mono_light(
+  base_color = "#23395b",
+  header_font_google = google_font("Source Sans Pro"),
+  text_font_google   = google_font("Source Sans Pro", "300", "300i"),
+  code_font_google   = google_font("Ubuntu Mono"), text_font_size = "24px"
+)
+```
+<!-- falar de `R`
+introduzir rstudio
+falar da consola, do script, do _workspace_ e do diretorio de trabalho,
+falar de caminhos relativos,
+falar do help,
+do help das funcoes, 
+de ajuda online,
+falar de boas praticas de trabalho em `R`: 
+-->
+
+![](http://www.r-project.org/Rlogo.png)
+
++ uma **linguagem** de programação estatística criada em 1991 a partir de S e S-PLUS o código original tem mais de 40 anos e consistia em rotinas de FORTRAN para análise estatística
+
+--
+
++ **software _livre_**: gratuito e de código livre, livre de ser usado e modificado para qualquer fim
+
+--
+
++ __Cross-platform__: pode ser usado em qualquer sistema operacional
+
+--
+
++ __Reprodutibilidade__: programação baseada em _scripts_
+
+---
+
+## Vantagens de usar `R`
+
++ __Robusteza e transparência__: o código é escrito pelos especialistas mas pode ser examinado
+
+--
+
++ __Suporte não oficial__: uma comunidade ativa trabalhando nas mesmas perguntas que você
+
+--
+
++ __Interdisciplinário e extensível__ (listas de emails, stack overflow, rstudio community)
+
+--
+
++ __Flexibilidade__: o usuário pode virar programador
+
+--
+
++ __Integração__ com outras ferramentas
+
+--
+
++ Ótima __capacidade gráfica__!
+
+
+
+#### Filosofia: Um ambiente interativo, que facilite a transição de usuário para programador
+
+---
+
+# Pacotes de `R`
+
++ `R` tem uma estrutura modular: 
+    + Os pacotes de base são desenvolvidos e mantidos pelo __`R` Core Development Team__
+    + As pessoas escrevem pacotes que podem ser instalados e carregados dependendo da necessidade.
+    + O repositório oficial: __CRAN__ (The Comprehensive `R` Archive Network: http://cran.r-project.org/)
+    + Outras fontes de pacotes: Bioconductor, github,  **rOpenSci.org**, páginas pessoais etc. 
+
+---
+background-image: url(figs/cran.png)
+background-size: 100%
+background-position: 50% 90%
+
+## CRAN https://cran.r-project.org/
+
+
+"CRAN é uma rede de servidores ftp e web servers ao redor do mundo que guarda versões idênticas e atualizadas do código e documentação para `R`. Por favor use o espelho (_mirror_) de CRAN mais próximo de você para minimizar a carga da rede."  __Fiocruz__
+
+---
+background-image: url(figs/bioconductor.png)
+background-size: 100%
+
+---
+background-image: url(figs/github-pkg.png)
+background-size: 100%
+background-position: 50% 80%
+
+# Desde github
+
+---
+background-image: url(figs/github-pkg2.png)
+
+
+
+---
+class:inverse
+
+---
+
+---
+# Instalar pacotes
+
+
+```{r, eval =F}
+install.packages("vegan")
+```
+
+```{r, eval =T}
+library("vegan")
+citation("vegan")
+```
+
+---
+## Onde rodar `R`?
+
++ `R` pode ser rodado desde qualquer __terminal__ de windows, mac, linux.
++ A interface original de `R` é uma consola onde o código é escrito
++ Na versão para windows e mac tem um editor de texto incorporado e algumas opções (`R`-GUI)
++ Algumas interfaces gráficas e ajudas para executar:
+  + Modo ESS do Emacs
+  + RStudio
+  
+# RStudio não é `R` e não está fazendo as análises, é uma interface
+
+--
+
+.pull-right[
+...mas estaremos usando RStudio
+]
+
+---
+background-image:url("figs/00_rstudio.png")
+background-size: 90%
+
+![](https://www.rstudio.com/wp-content/uploads/2016/09/RStudio-Logo-Blue-Gray-125.png)
+
+---
+background-image:url("figs/00_rstudio.png")
+background-size: 90%
+
+![](https://www.rstudio.com/wp-content/uploads/2016/09/RStudio-Logo-Blue-Gray-125.png)
+
+
+.pull-left[
+##Script
+]
+
+.pull-right[
+## __*workspace*__
+]
+
+.footnote[
+###Consola (`R` vive aqui) 
+]
+]
+
+ <!-- abrir, 
+ Arquivo > Novo arquivo > `R` script
+4 esquinas, o script, a consola, algumas abas que iremos explorando 1. foco en el script
+getwd() control enter, algo similar a esto debe aparecer
+ dà para escribir lo mismo en la consola pero no va a quedar guardado. 
+ el script puede ser salvado. 
+ la hitoria va a registrar ambas cosas
+ a maior parte do trabalho vai ser aqui e quando tiver um plot vai na aba de plots, quando tiver algum objeto no ambiente, ele vai ser listado no ambiente
+ --> 
+
+---
+## Uma breve introdução a `R`
+
+Uma sessão de trabalho em `R` inclui:
+
++ Usar o _script_ para mandar instruções à __consola__
+
++ Criar objetos ou ler os dados do HD para "dentro" da sessão (o __*workspace*__)
+
++ Trabalhar com os objetos do __*workspace*__, executando funções dos __pacotes__ 
+
++ Salvar o resultado no HD de volta
+
+.pull-right[
+
+         Tudo o que existe são objetos.  
+         Tudo o que acontece são chamadas a funções  
+                         Chambers, 2014  
+]
+ 
+---
+## O script
+
++ Arquivo de texto com extensão __.R__
++ Ele permite recriar todas as análises -> __reprodutibilidade__
++ É a unidade de busca e troca entre pesquisadores e está sendo anexada a publicações científicas 
+
+--
+
+## O _workspace_ 
+
++ Os objetos são armazenados na memória RAM (temporariamente) no ___workspace___ da sessão.
++ O operador __`<-`__ cria o objeto (assigna o nome)
++ Tem muitas formas de ler diferentes tipos de dado, funções como `read.table()` ou `read.csv()`
++ Também tem muitas formas de salvar os resultados:
+`write.table()` ou `write.csv()` para tabelas, `write.png()` e similares para imagens, etc.
+
+---
+background-image: url(figs/crochet.jpg)
+background-size: 30%
+background-position: 50% 60%
+## Sobre o _workspace_...
+
++ `R` poderia salvar o _workspace_ (.RData) e restabelecê-lo entre sessões
+
++ Mas só porque você pode fazer algo não quer dizer que você _deva_ fazê-lo
+
+.footnote[
+__Não salve o _workspace___
+]
+
+---
+## Sobre o _workspace_...
+
++ Você pode querer salvar trabalho para depois, daí salvar o _workspace_ num arquivo .RData e recuperá-lo para depois. Mas como você criou? O código estava bem? 
+
+--
+
++ A recomendação é depender apenas do __script__ para reconstituir todo o fluxo de trabalho. 
+
+--
+
++ Caso seja necessário, usar o script para salvar objetos maiores no HD (para que estes possam ser lidos posteriormente).
+
+--
+
+.footnote[
+__Não salve o _workspace___
+]
+
+---
+## A pasta de trabalho (_working directory_)
+
++ A gente vai estar escrevendo scripts
+--
+
++ Lendo dados de algum lugar do HD
+--
+
++ Salvando os objetos em algum lugar do HD 
+--
+
++ __Precisamos saber de onde ler e onde salvar__
+--
+
+- Toda sessão de `R` é executada em uma pasta específica do computador, a __pasta de trabalho__. 
+--
+
+  * Armazena o _workspace_
+  * Lê os arquivos e outros objetos
+  * É onde devem estar os scripts
+
+#### Essa pasta vai estar em um caminho diferente para cada um e para cada projeto -> "Aqui"
+
+---
+## A pasta de trabalho (_working directory_)
+
+.pull-left[
+![](figs/word.jpg)
++ Word está instalado em `C:/Arquivos de programa/...`
++ Os arquivos estão nas pastas `C:/Usuario/.../Meus documentos/...`
++ _Ninguém abre Word primeiro_. 
++ Vai até a pasta do documento `.doc` e faz click
+]
+
+.pull-right[
+![](figs/rstudio.jpg)
++ RStudio e R estão instalados em `C:/Arquivos de programa/...`
++ Os arquivos estão nas pastas  `C:/Usuario/.../Meus documentos/...`
++ _Ninguém abre RStudio primeiro_. 
++ Vai até a pasta do documento `.R` e faz click
+]
+
+
+---
+## A pasta de trabalho (_working directory_)
+
++ __Cada projeto de análise deve ter sua própria pasta.__ 
+--
+
++ Dá para ter __subpastas__ para __dividir__ e __organizar__ o trabalho -> `Vamos usar isto muito`
+--
+
++ __Cada computador é diferente__ Como colaborar? 
+--
+
++ Nenhum caminho pode ser absoluto: a notação completa deve ser substituída por __caminhos relativos__
+
+ + Aqui : `.` ou nada
+ + Subpasta1: `./subpasta1`
+ + Subpasta2: `./subpasta2`
+ + Subsubpasta1: `./subpasta1/subsubpasta1`
+ + A pasta "de cima": `..`
+ + A pasta do lado: `../pasta_do_lado`
+
+---
+## Boas práticas de trabalho em `R`
+
+1. Manter cada projeto de `R` em uma única pasta de trabalho ✔
+2. Usar sempre script e comentar muito o código (`#`) ✔
+3. Criar um arquivo de metadados (README).
+3. Ter uma estrutura de pastas e subpastas que permita organizar a informação adequadamente, separando __dados originais__, __outputs__ e __documentação__ (`./data`,`./outputs`, `./figs` e `./docs`, por exemplo).
+4. Usar __caminhos relativos__ (_relative pathways_) para ler os dados dentro dessa estrutura de pastas. (aqui `.` ou nada, subpastas: `./subpastas`)
+ 
+---
+class: inverse, center, middle
+
+# Vamos configurar RStudio 
+
+---
+background-image:url("figs/0a_setup.png")
+background-size: 60%
+background-position: 100% 100%
+#### Não salve o workspace
+
+
+---
+background-image:url("figs/0b_soft_wrap.png")
+background-size: 60%
+background-position: 100% 100%
+
+.pull-left[
+As linhas longas do script são cortadas para facilitar a vida
+]
+
+---
+background-image:url("figs/0bb_packages.png")
+background-size: 50%
+background-position: 100% 100%
+
+"Por favor use o espelho (_mirror_) de CRAN mais próximo de você para minimizar a carga da rede."  __Fiocruz__
+
+---
+background-image:url("figs/0c_codificacao.png")
+background-size: 50%
+background-position: 100% 100%
+
+A codificação pode gerar erros entre sistemas operativos, em particular com caracteres especiais. UTF-8 é um padrão bem reconhecido entre plataformas.
+
+.pull-left[
+![](figs/encoding.png)
+]
+
+---
+background-image:url("figs/0d_terminal.png")
+background-size: 50%
+background-position: 100% 100%
+
+O terminal de git vai dar menos problemas porque windows é diferente de mac e linux
+
+
+---
+## Uma breve introdução a `R`
+
++ Crie a pasta onde você quer trabalhar __"AQUI"__
++ Crie as subpastas seguintes: 
+
+`/R`  
+`/Data`  
+`/Results`  
+`/docs`  
+
++ Crie um arquivo `README.txt` na base da pasta
+
+
+---
+# No Rstudio
+
++ Abra um script de `R Arquivo > Novo arquivo > Script`
++ Escreva `getwd()`
++ Mande o comando com `Ctrl+ Enter`
++ `getwd()` significa _Get working directory_ -> __onde estou trabalhando?__ 
++ Qual é o resultado de sua chamada a `getwd()`?
+
+```{r}
+
+getwd()
+
+```
+
+---
+# No Rstudio
+
+
++ Salve o script na pasta onde você quer trabalhar
++ Feche RStudio
++ Faça click no arquivo .R que você criou __DESDE O EXPLORADOR DE ARQUIVOS__
++ RStudio deve abrir de novo 
++ Execute de novo o script com ctrl+Enter (`getwd()`)
++ Seu wd deve ter mudado. 
+
+---
+# Projetos de RStudio
+
+RStudio tem uma opção muito útil para manter a organização dos projetos de análise de dados: os projetos de RStudio. 
+
+No canto superior direito do programa, veja o botão de projeto
+
++ Novo projeto
++ Directorio existente > Vá até a pasta "AQUI"
++ Crie ("test"), abra
+
+.pull-left[
+![](figs/project.png)
+]
+
+.pull-right[
+![](figs/test.png)
+]
+
++ Sua pasta deve ter o script e um arquivo `.Rproj`
+
+---
+# Projetos de RStudio
+
++ Os projetos de RStudio permitem que você tenha um arquivo associado a uma pasta para cada projeto de análise de dados. 
+
++ RStudio inclui suporte para algo muito importante: o __controle de versões__
+
+---
+class: middle, center
+
++ Um projeto de RStudio na pasta que queríamos + um script que só diz `getwd()`
+
+---
+# FOI!
+![](https://media.giphy.com/media/3oriO04qxVReM5rJEA/giphy.gif)
+
+---
+class: middle, center
+
+# Agora vamos fazer a configuração de RStudio e de git* 
+
+---
+# RStudio e git
+
++ Abra um terminal usando `Ferramentas > Terminal > Novo Terminal`
+
+--
+
++ Tecle `pwd` no Terminal. pwd significa `print working directory`, deve ter o nome da mesma pasta onde estamos
+
+---
+
+## Só se você está no seu próprio computador!
+
++ No Terminal, tecle:  
+`git config user.name`   
+`git config user.email`   
+(Nada deve aparecer, se algo aparecer avisa)
+--
+
++ Agora tecle:  
+`git config user.name "seu nome"`  
+`git config user.email "seu email do github!"`   
+--
+
++ Agora confira de novo:  
+`git config user.name`  
+`git config user.email`  
+__As variáveis que você inseriu devem aparecer__
+
++ __Até aqui git está configurado no computador e ele sabe quem é você. Vamos conectar o seu computador com `github`__
+
+---
+## Só se você está no seu próprio computador!
+
+1. `Preferencias > git/svn`
+1. Checar que git está apontando para um arquivo `git.exe`
+2. O campo SVN vazio
+3. Naõ deve ter nada no campo da chave RSA.
+4. `Criar RSA Key`
+5. Ver a RSA Key, copiar a chave. Ela é uma chave que identifica seu computador e vamos copiá-la no github.com
+
+---
+### No Github
+
+1. Log in
+2. Perfil > Chaves ssh > criar uma chave ssh
+4. Nome de seu computador
+5. Colar a chave que tinha sido copiada. 
+6. Add, OK. 
+
++ __Até aqui github e seu computador podem se comunicar :D__
+
+---
+### Criar um repositório de trabalho
+
+#### No Github
+1. Novo repositório (botão verde). Nomeie, público, YES, sem readme. 
+![](figs/1_github_create.png)
+
+2. Vai abrir uma página de instruções
+3. Selecione HTTPS ou SSH (computador próprio) e copie
+
+
+---
+#### No RStudio
+1. `Project options > Git/SVN Version control system: Git` (vai reiniciar)
+
+![](figs/projopt.png)
+
+---
+#### No RStudio
+
+2. Veja se há remotos para esta pasta: `git remote -v` Nada, não é?
+
+3. No terminal `git remote add origin [O que vc copiou]`
+(No meu caso: `git remote add origin [git@github.com:AndreaSanchezTapia/test.git]`)
+
+3. Cheque de novo: `git remote -v`. Ele deve mostrar o que você adicionou, como push e como pull
+
+#### Até aqui seu computador e github estão se comunicando e você está prontx para adicionar arquivos ao seu repositório
+
+
+4. `git add script.R`
+5. `git commit -m "Initial commit"`
+6. `git push -u origin master`
+
+---
+# Volte para sua conta de github: o que mudou?
+ 
++ Você acaba de usar git e github pela primeira vez. Vamos ter uma aula sobre git mais adiante
++ Vamos explorar a página do repositório
+
+---
+# Projeto de análise, repositório
+
++ __O setup que realizamos previamente fez com que o projeto de RStudio ficasse associado a um repositório de git com conexão a github.com__
+
++ A __pasta de trabalho__, o projeto de RStudio e o repositório ficam na mesma pasta de seu computador. 
+
+---
+## Uma breve introdução a `R`
+
+No script: 
+
+```{r}
+ls() # lista os objetos guardados na memória
+```
+
++ Logicamente não há nada. 
+
+```{r}
+3 + 2 # executa a soma
+ls()
+```
+
++ Nada mudou
+
+---
+## Uma breve introdução a `R`
+
++ Para criar objetos utiliza-se o operador __`<-`__ 
++ Ele assigna o nome ao objeto
+
+
+```{r}
+a <- 3 # cria o objeto a
+# para obter o valor de a o comando "a" deve ser executado
+a 
+ls()
+```
+
++ O objeto __`a`__ foi criado e agora ele está no __workspace__
++ Um objeto `a` deve aparecer na aba de environment do RStudio
+
+---
+## Uma breve introdução a `R`
+
+```{r}
+b <- c(5, 4, 2, 1) #cria o vetor b
+b
+```
+
+Na aba ambiente deveria ter um objeto `a` e outro `b`
+
+```{r}
+a + b
+```
+
+---
+# Nosso script
+
+```
+getwd()
+ls()
+3 + 2
+ls()
+a <- 3
+a
+ls()
+b <- c(5, 4, 2, 1)
+b
+a + b
+```
+
+---
+# Veja a aba git
+
++ `script.R` está listado? M Modificado. 
++ Clic em `diff` o que dá para ver?
++ Faça click em staged - isto foi equivalente ao comando add que a gente fez antes
++ Escreva segundo commit na caixa de texto
++ Commit
++ Push
+
+background-image: url("figs/commit.mp4")
+
+---
+# Volte para github.com
+
+---
+# Hoje: 
+
++ Configuramos uma pasta de trabalho que é projeto de RStudio e repositório de github
++ Adicionamos um script de R e modificamos o script. O progresso ficou salvo em dois "commits"
++ Amanhã vamos começar a usar esta estrutura de trabalho 
+
+
+
+
+
+
