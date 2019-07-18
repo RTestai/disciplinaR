@@ -1,0 +1,85 @@
+---
+title: "Relação entre Comprimento e Largura da Sépala das flores Iris"
+output:
+  html_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introdução
+O objetivo deste texto é ilustrar os dados de largura e comprimento das Pétalas e Sépalas das espécies de Iris Virginica, Setosa e Versicolor. 
+Um dos conjuntos de dados mais famosos e introdutórios em biologia e ciência de dados é o conjunto de dados Iris criado por Ronald Fisher. Ele mediu o comprimento da sépala e a largura da sépala e mediu o comprimento da pétala e a largura da pétala de 150 flores de íris.
+Na tabela abaixo está sendo representada uma amostra de todo o conjunto de dados.
+
+```{r tabela, echo = FALSE}
+head(iris)
+print("[...]")
+tail(iris)
+
+```
+
+# Representação Gráfica
+
+Uma análise interessante a ser feita, é comprar a relação entre o comprimento da pétala com a largura da sépala para cada espécie, verificando o quanto que ambos os tamanhos de razoavelmente proporcional. 
+Nas figuras abaixo, pode-se perceber, através da distribuição desses pontos em eixos de comprimento em função da largura, a tendencia de crescimento, analisando o coeficiente angular das retas aproximadas através de regressão linear entre os dados. 
+
+```{r pressure, echo=FALSE}
+
+# criando objetos para auxiliar a construção do gráfico
+# criando modelos lineares
+mVirg <- lm(Petal.Length ~ Sepal.Width, data=iris[iris$Species=="virginica",])
+mVers <- lm(Petal.Length ~ Sepal.Width, data=iris[iris$Species=="versicolor",])
+mSet <- lm(Petal.Length ~ Sepal.Width, data=iris[iris$Species=="setosa",])
+coefVirg <- coef(mVirg)
+coefVers <- coef(mVers)
+coefSet <- coef(mSet)
+# definindo os limites dos eixos
+limy <- c(min(iris$Petal.Length),max(iris$Petal.Length))
+limx <- c(min(iris$Sepal.Width),max(iris$Sepal.Width))
+## definindo os nomes dos eixos
+labx <- "Largura da Sépala"
+laby <- "Comprimento da Pétala"
+#Construindo os Gráficos:
+
+# define parametros graficos
+par(mfrow=c(1,3), las=1, bty="l") # aqui estamos usando las e bty dentro do par para fixar para todas as janelas
+## Primeiro Plot:
+plot(Petal.Length ~ Sepal.Width, data=iris[iris$Species=="virginica",], 
+     col="tomato",
+     ylim=limy, xlim=limx,
+     ylab=laby, xlab=labx)
+
+# linha do previsto pelo modelo
+## a + b*x 
+abline(a=coefVirg[1], b=coefVirg[2],
+       col='tomato', lwd=2)
+mtext("A", 3, adj=0, font=2)
+
+## Segundo Plot:
+plot(Petal.Length ~ Sepal.Width, data=iris[iris$Species=="versicolor",], 
+     col="navy",
+     ylim=limy, xlim=limx,
+     ylab="", xlab=labx)
+mtext("B", 3, adj=0, font=2)
+# linha do previsto pelo modelo
+## a + b*x 
+abline(a=coefVers[1], b=coefVers[2],
+       col='navy', lwd=2)
+
+## Terceiro Plot:
+
+plot(Petal.Length ~ Sepal.Width, data=iris[iris$Species=="setosa",], 
+     col="blue",
+     ylim=limy, xlim=limx,
+     ylab="", xlab=labx)
+mtext("C", 3, adj=0, font=2)
+# linha do previsto pelo modelo
+## a + b*x 
+abline(a=mSet[1], b=mSet[2],
+       col='blue', lwd=2)
+```
+
+
