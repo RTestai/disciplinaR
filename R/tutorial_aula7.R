@@ -128,7 +128,7 @@ axis(1, at=1:3, labels=sp, font=3)
 par(mfrow=c(1,1))
 
 
-# Obs.: xaxts é para não plotar o eixo x.
+# Obs.: xaxts é para não plotar o eixo
 
 
 # Gráfico de Média e Desvio Padrão:
