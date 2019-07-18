@@ -1,16 +1,12 @@
 tabela <- read.csv("./data/exercicio_03_corrigido.csv",sep = ";",header=TRUE)
 tabela
-dim(tabela)
-sum(tabela)
-table(tabela$P1)
-cont <- 1
+soma <- 0
+for (i in 2:ncol(tabela)){
+  soma <- soma + sum(tabela[,i])
+}
 
-for (i in 1:20){
-  cont <- cont + table(tabela[i,])[[2]]
-  }
+soma
 
-  
-cont
 
 
   
