@@ -11,12 +11,12 @@ library(raster)
 
 
 
-### git pull ("vai puxar o arquivo)
+### git pull origin master ("vai puxar o arquivo)
 ### git init
 ### git status
 ### git add
 ### git commit -m "..."
-### git push 
+### git push origin master
 ### No ignore para deletar um arquivo específico: data/exerc...xlsx
 ### No ignore para deletar uma pasta específica: /data
 ### No ignore para deletar um formato específico: *xlsx
@@ -136,6 +136,31 @@ library(raster)
 #hist() monta um histograma de frequência.
 # Só é possível plotar uma curva em um histograma se for uma distribuição probabilística, usando o prob=true.
 # a função pairs() retorna o gráfico das correlações.
+
+
+
+
+
+#================================================                             
+#=======  Aula 7 - Análise de Gráficos:  ========
+#================================================
+
+
+
+# ?factor()
+# ?barplot()
+# Col no barplot para mudar a cor do gráfico.
+# Color Brewer é boa para mapas.
+# Color Lovers também é boa para criar paletas de cores.
+# Pacotes de cores: wesanderson, HColorBrewer, swatches, colourLovers
+#gganimate para criar gráficos animados.
+
+
+
+
+
+
+
 
 
 
