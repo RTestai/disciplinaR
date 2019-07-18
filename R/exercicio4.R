@@ -1,4 +1,12 @@
-tab <- read.csv("https://raw.githubusercontent.com/AndreaSanchezTapia/analise_de_dados_ENBT_2019/master/aula04/data/0012594-190621201848488.csv","\t",header=TRUE)
+tab <- read.csv("./data/teste.csv",";",header=TRUE)
 
-tab
 
+decimalLongitude <- tab$decimalLongitude
+decimalLatitude <- tab$decimalLatitude
+especie <- tab$species
+
+
+x <- data.frame(species = especie, longitude = decimalLongitude, latitude = decimalLatitude )
+x
+
+write.csv(x, "./resultados/Planilha Organizada_exercicio4.csv")
