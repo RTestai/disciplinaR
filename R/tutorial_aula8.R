@@ -7,7 +7,7 @@ library("sp")
 library("raster")
 library("rgeos")
 
-westeros <- readOGR("./data/GoTRelease/political.shp", encoding = "UTF-8")
+westeros <- readOGR("C:/Users/JBRJ.JBRJ09286D/Desktop/disciplinaR/Aulas/aula08/data/GoTRelease/political.shp", encoding = "UTF-8")
 
 plot(westeros, las = 1, axes = T)
 abline(h = 0, lty = 2, col = "tomato") #plotando a linha do 'equador'
@@ -23,8 +23,8 @@ plot(stark, axes = T, las = 1)
 
 pontos <- spsample(stark, 10, 'random')
 
-plot(stark, axes = T)
-points(pontos, pch = "+", col = "tomato", cex = 1.5)
+plot(stark, las = 1, axes = T)
+points(pontos, pch = "=", col = "tomato", cex = 1.5)
 
 pontos.buffer <- buffer(pontos, width = 200000, dissolve = TRUE)
 
@@ -44,11 +44,11 @@ plot(stark, add = T, col = "lightblue")
 # Incluindo atributos
 
 westeros
-westeros$regiao <- c(rep(1:3, each = 4))
+westeros$regiao <- c(rep(1:3, each = 4)) # Ele está incluindo na nova coluna "Região" com os valores de repetição de números de 1 a 3 quatro vezes cada. Essa tabela de atributos pode ser transformada em data frame e exportada. Da mesma forma o oposto.
 westeros
 
 # Uninindo Poligonos
-
+names(westeros)
 westeros_contorno = aggregate(westeros)
 plot(westeros_contorno, axes = T)
 
@@ -66,6 +66,8 @@ writeOGR(
   layer = "westeros_contorno", #nome do arquivo
   driver = "ESRI Shapefile" #formato pretendido para exportação
 )
+# Para conseguir resolver o erro da writeogr deve-se incluir a tabela de atributor na geometria. 
+
 
 
 westeros_raster <- raster(westeros_contorno, res = 0.08)
@@ -76,16 +78,17 @@ plot(westeros_raster)
 
 # Manipulando Raster:
 
-var1 <- raster("./data/vars/var_1.tif")
+var1 <- raster("C:/Users/JBRJ.JBRJ09286D/Desktop/disciplinaR/Aulas/aula08/data/vars/var_1.tif")
 var1
 
 plot(var1)
 
-lista <- list.files("./data", pattern = "tif$", full.names = T)
+lista <- list.files("C:/Users/JBRJ.JBRJ09286D/Desktop/disciplinaR/Aulas/aula08/data", pattern = "tif$", full.names = T) # O cifrão significa que termina ali.
+lista
 vars <- stack(lista)
 plot(vars)
 
-vars <- stack("./data/vars.tif")
+vars <- stack("C:/Users/JBRJ.JBRJ09286D/Desktop/disciplinaR/Aulas/aula08/data/vars.tif")
 plot(vars)
 
 writeRaster(var1, "output.tif")
@@ -98,13 +101,13 @@ plot(media)
 
 # Modificando Raster
 
-westeros <- readOGR("./data/GoTRelease/political.shp", encoding = "UTF-8")
+westeros <- readOGR("C:/Users/JBRJ.JBRJ09286D/Desktop/disciplinaR/Aulas/aula08/data/GoTRelease/political.shp", encoding = "UTF-8")
 
 stark <- westeros[westeros$ClaimedBy == "Stark",]
 stark
 
 plot(westeros, axes = T, las = 1)
-plot(stark, add = T, col = "tomato")
+plot(stark, add = T, col = "tomato") # O add = TRUE adiciona no mesmo layer
 
 plot(var1)
 plot(westeros, add = T)
@@ -132,7 +135,7 @@ plot(stark, add = T)
 
 # Alterando a resolução do raster
 
-var1.aggregated = aggregate(var1, fact = 5, fun = "mean")
+var1.aggregated = aggregate(var1, fact = 4, fun = "mean")
 var1.aggregated
 
 plot(var1.aggregated)
