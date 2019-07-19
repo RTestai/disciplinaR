@@ -161,11 +161,16 @@ library(raster)
 
 
 #================================================                             
-#===========  Aula 8 - Markdown:  ===============
+#===========  Aula 8 - SIG no R:  ===============
 #================================================
 
 
-
-
-
+# sp - vetoriais
+# raster
+# rgdal
+# rgeos
+# SpatialPoint/Line/Polygons - só geometria
+# SpatialPoint/Line/Polygons com DataFrame será uma geometria com informação, atributos
+# RasterBrick e RasterStack não tem muita diferença em termos de junção de dados raster. A diferença é mais na leitura no R. O Stack é mais usado.
+# Conferir o Source, porque se estiver na memória deve-se salvar no HD.
 
