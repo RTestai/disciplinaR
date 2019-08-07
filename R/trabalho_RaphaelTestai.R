@@ -3,6 +3,7 @@ library(raster)
 ### Para listar os Objetos no Workspace
 #ls()
 
+## TESTANDO O COMMIT
 ### Para remover
 #rm(lista = ls())
 
