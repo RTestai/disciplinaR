@@ -1,13 +1,13 @@
-install.packages("rgdal")
-install.packages("sp")
-install.packages("raster")
-install.packages("rgeos")
-library("rgdal")
-library("sp")
-library("raster")
-library("rgeos")
+#install.packages("rgdal")
+#install.packages("sp")
+#install.packages("raster")
+#install.packages("rgeos")
+#library("rgdal")
+#library("sp")
+#library("raster")
+#library("rgeos")
 
-westeros <- readOGR("C:/Users/JBRJ.JBRJ09286D/Desktop/disciplinaR/Aulas/aula08/data/GoTRelease/political.shp", encoding = "UTF-8")
+westeros <- readOGR("./Aulas/aula08/data/GoTRelease/political.shp", encoding = "UTF-8")
 
 plot(westeros, las = 1, axes = T)
 abline(h = 0, lty = 2, col = "tomato") #plotando a linha do 'equador'
@@ -64,9 +64,10 @@ writeOGR(
   westeros_contorno, #nome do objeto a ser salvo
   dsn = "./data/meushape", #diretorio a serem salvos os resultados
   layer = "westeros_contorno", #nome do arquivo
-  driver = "ESRI Shapefile" #formato pretendido para exportação
+  driver = "ESRI Shapefile", #formato pretendido para exportação
+  overwrite=TRUE
 )
-# Para conseguir resolver o erro da writeogr deve-se incluir a tabela de atributor na geometria. 
+# Para conseguir resolver o erro da writeogr deve-se incluir a tabela de atributo na geometria. 
 
 
 
@@ -78,20 +79,20 @@ plot(westeros_raster)
 
 # Manipulando Raster:
 
-var1 <- raster("C:/Users/JBRJ.JBRJ09286D/Desktop/disciplinaR/Aulas/aula08/data/vars/var_1.tif")
+var1 <- raster("./Aulas/aula08/data/vars/var_1.tif")
 var1
 
 plot(var1)
 
-lista <- list.files("C:/Users/JBRJ.JBRJ09286D/Desktop/disciplinaR/Aulas/aula08/data", pattern = "tif$", full.names = T) # O cifrão significa que termina ali.
+lista <- list.files("./Aulas/aula08/data", pattern = "tif$", full.names = T) # O cifrão significa que termina ali.
 lista
 vars <- stack(lista)
 plot(vars)
 
-vars <- stack("C:/Users/JBRJ.JBRJ09286D/Desktop/disciplinaR/Aulas/aula08/data/vars.tif")
+vars <- stack("./Aulas/aula08/data/vars.tif")
 plot(vars)
 
-writeRaster(var1, "output.tif")
+writeRaster(var1, "output.tif", overwrite=TRUE)
 
 
 # Álgebra de Raster
@@ -101,7 +102,7 @@ plot(media)
 
 # Modificando Raster
 
-westeros <- readOGR("C:/Users/JBRJ.JBRJ09286D/Desktop/disciplinaR/Aulas/aula08/data/GoTRelease/political.shp", encoding = "UTF-8")
+westeros <- readOGR("./Aulas/aula08/data/GoTRelease/political.shp", encoding = "UTF-8")
 
 stark <- westeros[westeros$ClaimedBy == "Stark",]
 stark
